@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women's Safety Tracker</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #24668f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .wrapper {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            width: 100%;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 48%;
+            margin: 30px;
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #location, #nearestPolice {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+        }
+        #registeredUsers {
+            list-style-type: none;
+            padding: 0;
+        }
+        #registeredUsers li {
+            background-color: #f1f1f1;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        form {
+            margin: 20px 0;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+        input[type="text"], input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .sos-button {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        .sos-button:hover {
+            background-color: #ff1a1a;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <h1>Safety Tracker</h1>
+            <form>
+                <button type="button" onclick="registerLocation()">Register Location</button>
+                <br><br>
+                <button type="button" onclick="reportToPolice()">Report to Police</button>
+            </form>
+            <div id="location"></div>
+            <div id="nearestPolice"></div>
+            <h2>Registered Users</h2>
+            <ul id="registeredUsers"></ul>
+        </div>
+        
+
+        <div class="container">
+            <h2>SOS Emergency</h2>
+            <form id="sosForm">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
+        
+                <label for="contact">Emergency Contact Number:</label>
+                <input type="tel" id="contact" placeholder="Enter emergency contact number" required>
+                
+                <label for="issue">Issue:</label>
+                <textarea id="issue" name="issue" rows="5" required></textarea>
+                <button type="button" class="voice-button" onclick="startVoiceRecording()">
+                    <i class="fas fa-microphone"></i> Record Voice
+                  </button>
+        
+                <button type="button" class="sos-button" onclick="triggerSOS()">Send SOS</button>
+            </form>
+        
+            <div class="footer">
+                <p>Stay safe and call for help when needed.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLocation = null;
+        let nearestPoliceStation = null;
+        const registeredUsers = [
+            { id: 1, name: 'User 1', location: { lat: 40.7128, lng: -74.0060 } },
+            { id: 2, name: 'User 2', location: { lat: 34.0522, lng: -118.2437 } }
+        ];
+
+        function registerLocation() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    currentLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    document.getElementById('location').innerHTML = `Your Location: Lat ${currentLocation.lat.toFixed(4)}, Lng ${currentLocation.lng.toFixed(4)}`;
+                    findNearestPoliceStation();
+                    displayRegisteredUsers();
+                });
+            } else {
+                alert("Geolocation is not available in your browser.");
+            }
+        }
+
+        function findNearestPoliceStation() {
+            nearestPoliceStation = {
+                name: "Central Police Station",
+                location: { 
+                    lat: currentLocation.lat + 0.01, 
+                    lng: currentLocation.lng + 0.01 
+                }
+            };
+            document.getElementById('nearestPolice').innerHTML = `Nearest Police Station: ${nearestPoliceStation.name}`;
+        }
+
+        function reportToPolice() {
+            if (currentLocation && nearestPoliceStation) {
+                alert(`Reporting location to ${nearestPoliceStation.name}`);
+            } else {
+                alert("Please register your location first.");
+            }
+        }
+
+        function displayRegisteredUsers() {
+            const usersList = document.getElementById('registeredUsers');
+            usersList.innerHTML = '';
+            registeredUsers.forEach(user => {
+                const li = document.createElement('li');
+                li.textContent = `${user.name} - Lat: ${user.location.lat.toFixed(4)}, Lng: ${user.location.lng.toFixed(4)}`;
+                usersList.appendChild(li);
+            });
+        }
+
+        function triggerSOS() {
+            const contactNumber = document.getElementById('contact').value;
+            if (!contactNumber) {
+                alert('Please enter an emergency contact number.');
+                return;
+            }
+            window.location.href = `tel:${contactNumber}`;
+        }
+        function startVoiceRecording() {
+      if (!("webkitSpeechRecognition" in window)) {
+        alert("Speech recognition is not supported in this browser.");
+        return;
+      }
+
+      var recognition = new webkitSpeechRecognition();
+      recognition.lang = "en-US";
+      recognition.onresult = function(event) {
+        document.getElementById("issue").value = event.results[0][0].transcript;
+      };
+      recognition.start();
+    }
+
+        displayRegisteredUsers();
+    </script>
+</body>
+</html>

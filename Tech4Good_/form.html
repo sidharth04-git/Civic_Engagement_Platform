@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css">
+</head>
+<body style="background-image: linear-gradient(to right, #24243e, #15b094, #24243e);">
+
+    <h1>Complaint Box / Suggestion Box शिकायत पेटी / सुझाव पेटी </h1>
+    <div style="border: 2px solid black; display: flex; justify-content: center; border-radius: 10px;">
+        <form action="process-form.php" method="post">
+
+            <label for="name">Your Name / आपका नाम</label>
+            <input type="text" id="name" name="name">
+            
+            <label for="name">Your Address / आपका पता</label>
+            <input type="text" id="name" name="Address">
+            
+            <label for="name">Phone Number / फ़ोन नंबर</label>
+            <input type="text" id="name" name="Phone Number">
+            
+            <label for="message">Write a Problem / Suggestion कोई समस्या/सुझाव लिखें</label>
+            <textarea id="message" name="message"></textarea>
+    
+            <label for="img">Upload Image / यहां चित्र अपलोड करें</label>
+            <input type="file" id="img" name="img" accept="image/*">
+            <input type="submit">
+    
+            <label for="img">Upload Video / यहां वीडियो अपलोड करें</label>
+            <input type="file" id="img" name="img" accept="image/*">
+            <input type="submit">
+            <div>
+                <legend>Type / प्रकार</legend>
+    
+                <label>
+                    <input type="radio" name="type" value="1" checked>
+                    Complaint / शिकायत
+                </label>
+    
+                <br>
+    
+                <label>
+                    <input type="radio" name="type" value="2">
+                    Suggestion / सुझाव
+                </label>
+    
+            </div>
+    
+            <label>
+                <input type="checkbox" name="terms">
+                I agree to the terms and conditions / मैं नियमों और शर्तों से सहमत हूं
+            </label>
+    
+            <br>
+    
+            <button>Send</button>
+    
+        </form>
+    </div>
+</body>
+</html>

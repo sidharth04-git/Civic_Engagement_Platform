@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        textarea, input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .department {
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Register Your Complaint</h1>
+    <form id="complaintForm">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" required>
+
+        <label for="complaint">Your Complaint:</label>
+        <textarea id="complaint" rows="5" required></textarea>
+
+        <button type="submit">Submit Complaint</button>
+
+        <div class="result" id="result"></div>
+    </form>
+</div>
+
+<script>
+    // Mock function to categorize the complaint based on keywords
+    function categorizeComplaint(complaintText) {
+        const categories = {
+            "Electricity Department": ["power", "electricity", "light", "outage"],
+            "Education Department": ["school", "teacher", "education", "classroom"],
+            "Infrastructure Department": ["road", "bridge", "pothole", "infrastructure", "construction"],
+            "Water Department": ["water", "leak", "sewage", "pipeline"]
+        };
+
+        for (const department in categories) {
+            for (const keyword of categories[department]) {
+                if (complaintText.toLowerCase().includes(keyword)) {
+                    return department;
+                }
+            }
+        }
+        return "General Department";
+    }
+
+    // Handle form submission
+    document.getElementById('complaintForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Get the form data
+        const name = document.getElementById('name').value;
+        const complaintText = document.getElementById('complaint').value;
+
+        // Categorize the complaint
+        const department = categorizeComplaint(complaintText);
+
+        // Display the result
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = <p>Thank you, <strong>${name}</strong>. Your complaint has been forwarded to the <span class="department">${department}</span>.</p>;
+
+        // Here you would send the complaint to a server
+        // using fetch or XMLHttpRequest for actual deployment
+        console.log({
+            name: name,
+            complaint: complaintText,
+            department: department
+        });
+
+        // Reset the form
+        document.getElementById('complaintForm').reset();
+    });
+</script>
+
+</body>
+</html>

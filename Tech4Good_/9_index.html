@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Women Safety</title>
+  <link rel="stylesheet" href="1_index.html">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      padding: 40px;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .voice-button {
+      margin-bottom: 20px;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Report Issues for Women Safety</h1>
+  </header>
+  <main>
+    <form id="report-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="age">Mobile No:</label>
+      <input type="number" id="age" name="age" required>
+
+      <label for="location">Address:</label>
+      <input type="text" id="location" name="location" required>
+
+      <label for="issue">Issue:</label>
+      <textarea id="issue" name="issue" rows="5" required></textarea>
+
+      <label for="picture">Upload Picture (if available):</label>
+      <input type="file" id="picture" name="picture" accept="image/*">
+
+      <button type="button" class="voice-button" onclick="startVoiceRecording()">
+        <i class="fas fa-microphone"></i> Record Voice
+      </button>
+
+      <button type="submit">
+        <i class="fas fa-paper-plane"></i> Submit Report
+      </button>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById("report-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      var formData = {
+        name: document.getElementById("name").value,
+        age: document.getElementById("age").value,
+        location: document.getElementById("location").value,
+        issue: document.getElementById("issue").value
+      };
+      // Here you would send the form data to a server or API
+      console.log(formData);
+      alert("Report submitted successfully!");
+      document.getElementById("report-form").reset();
+    });
+
+    function startVoiceRecording() {
+      if (!("webkitSpeechRecognition" in window)) {
+        alert("Speech recognition is not supported in this browser.");
+        return;
+      }
+
+      var recognition = new webkitSpeechRecognition();
+      recognition.lang = "en-US";
+      recognition.onresult = function(event) {
+        document.getElementById("issue").value = event.results[0][0].transcript;
+      };
+      recognition.start();
+    }
+  </script>
+  <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+</body>
+</html>

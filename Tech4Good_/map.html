@@ -1,0 +1,95 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+<div id="map" style="height: 400px; width: 100%;"></div>
+<script>
+    function initMap() {
+      // Center the map on a specific location
+      const centerLocation = { lat: 37.7749, lng: -122.4194 }; // Example: San Francisco, CA
+  
+      // Create a map object
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 12,
+        center: centerLocation,
+      });
+  
+      // Add multiple markers to simulate movement or multiple locations
+      const locations = [
+        { lat: 37.7749, lng: -122.4194 }, // San Francisco
+        { lat: 37.7849, lng: -122.4094 }, // Nearby location
+        { lat: 37.7949, lng: -122.3994 }  // Another nearby location
+      ];
+  
+      // Loop through the locations and place markers
+      locations.forEach(location => {
+        new google.maps.Marker({
+          position: location,
+          map: map,
+          animation: google.maps.Animation.DROP // Adds a drop animation
+        });
+      });
+  
+      // Optional: Simulate movement by changing the position of a marker
+      let currentLocationIndex = 0;
+      const movingMarker = new google.maps.Marker({
+        position: locations[currentLocationIndex],
+        map: map,
+        title: "Simulated Moving Marker",
+      });
+  
+      setInterval(() => {
+        currentLocationIndex = (currentLocationIndex + 1) % locations.length;
+        movingMarker.setPosition(locations[currentLocationIndex]);
+      }, 2000); // Move marker every 2 seconds
+    }
+  </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Maps Simulation</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+</head>
+<body>
+
+  <!-- Section where the map will be displayed -->
+  <div id="map" style="height: 400px; width: 100%;"></div>
+
+  <script>
+    function initMap() {
+      const centerLocation = { lat: 37.7749, lng: -122.4194 };
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 12,
+        center: centerLocation,
+      });
+
+      const locations = [
+        { lat: 37.7749, lng: -122.4194 },
+        { lat: 37.7849, lng: -122.4094 },
+        { lat: 37.7949, lng: -122.3994 }
+      ];
+
+      locations.forEach(location => {
+        new google.maps.Marker({
+          position: location,
+          map: map,
+          animation: google.maps.Animation.DROP
+        });
+      });
+
+      let currentLocationIndex = 0;
+      const movingMarker = new google.maps.Marker({
+        position: locations[currentLocationIndex],
+        map: map,
+        title: "Simulated Moving Marker",
+      });
+
+      setInterval(() => {
+        currentLocationIndex = (currentLocationIndex + 1) % locations.length;
+        movingMarker.setPosition(locations[currentLocationIndex]);
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>
+  

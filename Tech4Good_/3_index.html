@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Status Tracker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <link rel="stylesheet" href="1_index.html">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .status-tracker {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        .status-step {
+            text-align: center;
+            position: relative;
+        }
+        .status-step::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background-color: #ccc;
+            z-index: -1;
+        }
+        .status-step:last-child::after {
+            display: none;
+        }
+        .status-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #ccc;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+        }
+        .status-icon.active {
+            background-color: #4CAF50;
+        }
+        .status-label {
+            margin-top: 5px;
+            font-size: 12px;
+        }
+        #complaintChart {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Complaint Status Tracker</h1>
+    
+    <div class="status-tracker">
+        <div class="status-step">
+            <div class="status-icon active">1</div>
+            <div class="status-label">Submitted</div>
+        </div>
+        <div class="status-step">
+            <div class="status-icon">2</div>
+            <div class="status-label">Under Review</div>
+        </div>
+        <div class="status-step">
+            <div class="status-icon">3</div>
+            <div class="status-label">In Progress</div>
+        </div>
+        <div class="status-step">
+            <div class="status-icon">4</div>
+            <div class="status-label">Resolved</div>
+        </div>
+    </div>
+
+   
+    <canvas id="complaintChart"></canvas>
+
+    <script>
+        // Sample data for the chart
+        const complaintData = {
+            
+            datasets: [{
+             
+              
+              
+            }]
+        };
+
+        // Create the chart
+        const ctx = document.getElementById('complaintChart').getContext('2d');
+        new Chart(ctx, {
+         
+        });
+
+        // Function to update the status tracker
+        function updateStatus(step) {
+            const statusIcons = document.querySelectorAll('.status-icon');
+            statusIcons.forEach((icon, index) => {
+                if (index < step) {
+                    icon.classList.add('active');
+                } else {
+                    icon.classList.remove('active');
+                }
+            });
+        }
+
+        // Example usage: Update status to "In Progress"
+        updateStatus(3);
+    </script>
+</body>
+</html>
+

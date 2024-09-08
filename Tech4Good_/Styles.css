@@ -1,0 +1,315 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Rubik:wght@600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    font-family: 'Rubik', sans-serif;
+}
+.navbar{
+    display: flex;
+    top: 0;
+    cursor: pointer;
+    max-height: 14vh;
+}
+.navbar li a:hover{
+   color: red;
+}
+.navbar li::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #f44336;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+.navbar li:hover::after{
+    width: 100%;
+}
+.navlist{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 3vh;
+    background-image: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+   
+}
+
+.navlist li{
+    list-style: none;
+    padding: 7vh 5vh;
+    padding-top: 12.2vh;
+}
+
+.navlist li a{
+    text-decoration: none;
+    color: wheat;
+    font-size: 1.8rem;
+}
+.logo{
+    /* padding-top: 2vh;
+    padding-left: 4.5vh; */
+    padding-bottom: 12vh;
+   
+    background-image: linear-gradient( #e89734, #ffffff, #16860a);
+
+}
+
+
+.homepage-content{
+    font-size: 2.2rem;
+    margin-left: 11vw;
+    padding-top: 27vh;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    color: wheat;
+}
+.Got-Issues{
+    padding-bottom: 2vh;
+    font-size: 3.5rem;
+}
+
+.Noone-to-help{
+    padding-bottom: 2vh;
+    font-size: 3.5rem;
+}
+
+.Dont-you-worry-we-got-you-covered{
+    font-size: 3.5rem;
+}
+.homepage{
+    height: 94vh;
+    background-image: linear-gradient(#f8eee6 ,#397090);
+    /* border-bottom: 2px dotted black;
+    border-width: 50%; */
+}
+
+.homepage-total{
+    display: flex;
+
+}
+.homepage-img{
+    width: 90vh;
+    height: 88vh;
+    
+}
+hr{
+    border-style: none;
+    border-top-style: dotted;
+    margin-bottom: 3%;
+    /*border-color: #9EB23B*/;
+    border-color: black;
+    border-width: 5px;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 50px
+}
+.about-us{
+    height: 80vh;
+    background-color: #b6d0e4;
+    display: flex;
+}
+
+.about-us-total{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.about-us-content{
+    /* width: 50%;
+    flex-direction: row-reverse;
+    font-size: 1.9rem;
+    padding-top: 23vh;
+    padding-right: 7vh;
+    font-family: 'Lato', sans-serif; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-family: sans-serif;
+    font-weight: 700;
+}
+
+.about-us-image{
+    width: 50%;
+}
+
+.about-us-img{
+    width: 65vh;
+    height: 60vh;
+    padding-top: 11vh;
+    padding-left: 8vh;
+}
+.container_sj{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #F2F2F2;
+    padding-bottom: 5%;
+    font-family: 'Lato', sans-serif;
+}
+.container-row{
+    display: flex;
+    flex-direction: row;
+}
+.box{
+    display: flex;
+    flex-direction: column-reverse;
+    height: 30vh;
+    width: 30vw;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-top: 1%;
+    margin-bottom: 3%;
+    background-color: white;
+    border-radius: 42px;
+
+}
+.box:hover{
+    filter: drop-shadow(0 0 10px  rgba(0, 0, 0, 0.5));
+}
+.box-image{
+    height: auto;
+    width: 10vw;
+
+}
+.box a{
+    text-decoration: none;
+    /* color: #4C0033; */
+}
+.box a:hover{
+    color: #8758FF;
+}
+.box a::before{
+    text-decoration: none;
+    /* color: #4C0033; */
+}
+.contact-footer{
+    height: 87vh;
+    background-color: #205375;
+
+}
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.left-footer{
+    width: 40%;
+    color: white;
+    font-family: 'Kantumruy Pro', sans-serif;
+
+}
+.form-footer{
+    display: flex;
+    flex-direction: column;
+    margin-left: 4vh;
+}
+#heading-footer{
+    color: white;
+    margin-left: 8vh;
+    margin-right:4vh ;
+    margin-bottom: 2vh;
+}
+.form-input{
+    border: none;
+    padding: 0.5vh;
+    margin-top: 1.5vh;
+    font-size: medium;
+    font-family: 'Kantumruy Pro', sans-serif;
+    width: 80%;
+    background-color: #205375;
+    border-bottom: 2px solid white;
+    color: white;
+    outline: none;
+    resize: both;
+}
+.btn-footer{
+    width: 16%;
+    margin-top: 4vh;
+    padding-top: 1.2vh;
+    font-size: medium;
+    background-color: #5a7282;
+    border-color: white;
+    color: white;
+    border-width: 3px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-footer:hover{
+    background-color: white;
+    color: #205375;
+}
+#follow-us{
+    margin-bottom: 3vh;
+    font-size: 2.7vh;
+    margin-top: 6vh;
+}
+.social-media-icon-footer{
+    list-style-type: none;
+    display: flex;
+}
+.sm-i-footer{
+    margin-right: 9vh;
+}
+.vl{
+    border-left: 3px solid white;
+    height: 60vh;
+    margin-top: 5vh;
+    margin-left: 10%;
+  }
+  .right-footer{
+    display: flex;
+    width: 60%;
+    justify-content: end;
+    color: white;
+    font-family: 'Kantumruy Pro', sans-serif;
+}
+.map{
+    margin-right: 4vh;
+    margin-top: 5vh;
+}
+.google-map{
+    width: 35vw;
+    height: 49vh;
+}
+#Address{
+    display: flex;
+    justify-content: end;
+    font-size: larger;
+    margin-top: 1.5vh;
+    margin-bottom: 2vh;
+}
+.contact-details{
+    display: flex;
+    flex-direction: column;
+    margin-right: 10vw;
+    margin-top: 19.5vh;
+    font-size: 2.5vh;
+    list-style: none;
+}
+a:link{
+    text-decoration: none;
+    color: grey;
+}
+
+a:hover{
+    color: #EBBB31;
+}
+
+
+

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Website - User Registration</title>
+    <link rel="stylesheet" href="1_index.html">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff; /* Light blue background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .toggle {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .toggle a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 id="formTitle">Login</h2>
+        <form id="authForm">
+            <input type="text" id="emailPhone" placeholder="Email or Phone Number" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <div id="signupFields" style="display: none;">
+                <input type="text" id="name" placeholder="Name">
+                <input type="text" id="address" placeholder="Address">
+                <input type="tel" id="phone" placeholder="Phone Number">
+                <input type="email" id="email" placeholder="Email">
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <div class="toggle">
+            <a href="#" id="toggleLink">Don't have an account? Sign up</a>
+        </div>
+    </div>
+
+    <script>
+        const formTitle = document.getElementById('formTitle');
+        const authForm = document.getElementById('authForm');
+        const toggleLink = document.getElementById('toggleLink');
+        const signupFields = document.getElementById('signupFields');
+        const emailPhoneInput = document.getElementById('emailPhone');
+
+        let isLogin = true;
+
+        toggleLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            isLogin = !isLogin;
+            if (isLogin) {
+                formTitle.textContent = 'Login';
+                toggleLink.textContent = "Don't have an account? Sign up";
+                signupFields.style.display = 'none';
+                emailPhoneInput.placeholder = 'Email or Phone Number';
+            } else {
+                formTitle.textContent = 'Sign Up';
+                toggleLink.textContent = 'Already have an account? Login';
+                signupFields.style.display = 'block';
+                emailPhoneInput.placeholder = 'Email';
+            }
+        });
+
+        authForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (isLogin) {
+                console.log('Login submitted');
+                // Add login logic here
+            } else {
+                console.log('Signup submitted');
+                // Add signup logic here
+            }
+        });
+    </script>
+</body>
+</html>

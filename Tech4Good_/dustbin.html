@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voice Form</title>
+<style>
+    #output {
+        margin-top: 10px;
+    }
+</style>
+</head>
+<body>
+
+<form id="voiceForm">
+    <label for="textInput">Enter text:</label>
+    <input type="text" id="textInput" name="text" required>
+</form>
+
+<div id="output"></div>
+
+<script>
+    const form = document.getElementById('voiceForm');
+    const inputField = document.getElementById('textInput');
+    const output = document.getElementById('output');
+
+    // Check browser support for SpeechRecognition
+    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+
+        // When speech recognition detects a result
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            inputField.value = transcript;
+            form.submit(); // Automatically submit the form after speech recognition
+        };
+
+        // When speech recognition encounters an error
+        recognition.onerror = function(event) {
+            console.error('Speech recognition error:', event.error);
+        };
+
+        // Start speech recognition when input field is focused
+        inputField.addEventListener('focus', function() {
+            recognition.start();
+        });
+    } else {
+        output.textContent = 'Speech recognition is not supported in this browser.';
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Impact Dashboard</title>
+    <link rel="stylesheet" href="1_">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .status-tracker {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        .status-step {
+            text-align: center;
+            position: relative;
+        }
+        .status-step::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background-color: #ccc;
+            z-index: -1;
+        }
+        .status-step:last-child::after {
+            display: none;
+        }
+        .status-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #ccc;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+        }
+        .status-icon.active {
+            background-color: #4CAF50;
+        }
+        .status-label {
+            margin-top: 5px;
+            font-size: 12px;
+        }
+        #complaintChart {
+            margin-top: 30px;
+        }
+    </style>
+
+    </style>
+</head>
+<body>
+
+    <h1>Complaint Status Tracker</h1>
+    
+    <div class="status-tracker">
+        <div class="status-step">
+            <div class="status-icon active">1</div>
+            <div class="status-label">Submitted</div>
+        </div>
+        <div class="status-step">
+            <div class="status-icon">2</div>
+            <div class="status-label">Under Review</div>
+        </div>
+        <div class="status-step">
+            <div class="status-icon">3</div>
+            <div class="status-label">In Progress</div>
+        </div>
+        <div class="status-step">
+            <div class="status-icon">4</div>
+            <div class="status-label">Resolved</div>
+        </div>
+    </div>
+
+
+    <div class="dashboard">
+        <h1>Community Impact Dashboard</h1>
+        <div class="stats">
+            <div class="stat-box">
+                <h2 id="totalComplaints">0</h2>
+                <p>Total Complaints</p>
+            </div>
+            <div class="stat-box">
+                <h2 id="resolvedComplaints">0</h2>
+                <p>Resolved Issues</p>
+            </div>
+            <div class="stat-box">
+                <h2 id="activeUsers">0</h2>
+                <p>Active Users</p>
+            </div>
+        </div>
+        <canvas id="impactChart"></canvas>
+    </div>
+
+
+
+
+
+    <script>
+
+
+        
+
+
+        // Simulated data - replace with real data from your backend
+        const complaintsData = {
+            totalComplaints: 1250,
+            resolvedComplaints: 980,
+            activeUsers: 5000,
+            monthlyData: [
+                { month: 'Jan', complaints: 100, resolutions: 80 },
+                { month: 'Feb', complaints: 150, resolutions: 120 },
+                { month: 'Mar', complaints: 200, resolutions: 180 },
+                { month: 'Apr', complaints: 180, resolutions: 150 },
+                { month: 'May', complaints: 220, resolutions: 200 },
+                { month: 'Jun', complaints: 250, resolutions: 230 }
+            ]
+        };
+
+        // Update dashboard stats
+        document.getElementById('totalComplaints').textContent = complaintsData.totalComplaints;
+        document.getElementById('resolvedComplaints').textContent = complaintsData.resolvedComplaints;
+        document.getElementById('activeUsers').textContent = complaintsData.activeUsers;
+
+        // Create impact chart
+        const ctx = document.getElementById('impactChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: complaintsData.monthlyData.map(data => data.month),
+                datasets: [
+                    {
+                        label: 'Complaints',
+                        data: complaintsData.monthlyData.map(data => data.complaints),
+                        borderColor: 'rgb(255, 99, 132)',
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Resolutions',
+                        data: complaintsData.monthlyData.map(data => data.resolutions),
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Monthly Complaints vs Resolutions'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
