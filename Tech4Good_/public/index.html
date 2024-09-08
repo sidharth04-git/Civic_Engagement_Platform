@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tweet Form</title>
+  </head>
+  <body>
+    <h1>Make a Tweet</h1>
+    <form id="tweetForm">
+      <label for="tweet">Tweet:</label><br />
+      <textarea id="tweet" name="tweet" rows="4" cols="50"></textarea
+      ><br /><br />
+      <button type="button" id="tweetButton">Tweet</button>
+    </form>
+
+    <script>
+      document
+        .getElementById("tweetButton")
+        .addEventListener("click", async function (event) {
+          event.preventDefault();
+
+          const tweet = document.getElementById("tweet").value;
+          console.log(tweet);
+
+          try {
+            const response = await fetch("/tweet", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ tweet }),
+            });
+
+            const data = await response.json();
+            alert(data.success);
+          } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again.");
+          }
+        });
+    </script>
+  </body>
+</html>
